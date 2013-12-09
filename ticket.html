@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<script src="JQuery/jquery-1.10.2.js"></script>
+		<script>
+		
+			function addTicket() {
+				ticketdiv = $("<div/>").addClass("ticket");
+
+				// name input field
+				iname = $("<input>");
+				iname.addClass("name");
+				iname.attr("type","text");
+				iname.attr("placeholder","first and last name");
+				// age input field
+				iage = $("<input>");
+				iage.addClass("age");
+				iage.attr("type","text");
+				iage.attr("placeholder","age");
+				
+				// delete button
+				idel = $("<input/>");
+				idel.addClass("delete");
+				idel.attr("type","button");
+				idel.attr("value","-");
+				
+				// add the input fields to the div
+				ticketdiv.append(iname);
+				ticketdiv.append(iage);	
+				ticketdiv.append(idel);
+				
+				return ticketdiv;	
+
+			}
+			
+			$(document).ready( function () {
+				// first thing
+				$(".tickets").append(addTicket());
+				
+				$("#badd").click( function () {
+					$(".tickets").append(addTicket());
+				});
+				
+				$("#bregister").click ( function () {
+					
+					ticketArray = new Array();
+					
+					// collect the info 
+					$("div.ticket").each( function () {
+						individualinfo = new Object();
+						individualinfo.name = $($(this).find("input.name")[0]).val();
+						individualinfo.age =  $($(this).find("input.age")[0]).val();
+						ticketArray.push(individualinfo);
+					})
+					
+					
+					// do the ajax call
+					$.ajax({
+						url: "ticket.php",
+						dataType : "text",
+						data : {
+							tickets : ticketArray,
+							/*
+							tickets : [
+							{name : "Ignas", age : 22},
+							{name: "renata", age : 17},
+							{name: "andre sa", age : 67}
+							]
+							*/
+						},
+						success : function (xpto) {
+							$(".receipt").html(xpto);
+						}
+					});
+				});
+			});
+			
+		</script>
+	</head>
+	<body>
+		<div class="header">
+			<h4>
+				Rolling Stones 2014 Tour (if they do not die until then)  - Oporto - Group Ticket Reservation
+			</h4>
+		</div>
+		<div class="add">
+			<input type="button" id="badd" value="add new +"/>
+		</div>
+		<div class="tickets">
+			
+		</div>
+		<div class="submit">
+			<input type="button" id="bregister" value="register" />
+		</div>
+		<div class="receipt">
+			
+		</div>
+		
+	</body>
+</html>
