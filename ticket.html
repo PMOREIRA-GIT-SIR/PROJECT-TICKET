@@ -3,6 +3,7 @@
 		<script src="JQuery/jquery-1.10.2.js"></script>
 		<script>
 		
+		
 			function addTicket() {
 				ticketdiv = $("<div/>").addClass("ticket");
 
@@ -38,6 +39,31 @@
 				
 				$("#badd").click( function () {
 					$(".tickets").append(addTicket());
+				});
+				
+				/*
+				 * attaching event handlers this way
+				 * only works for elements that exists at that
+				 * moment in the document
+				 */
+				/*
+				$(".delete").click( function () {
+					$(this).parent().empty();
+				});
+				*/
+				
+				/*
+				 * to attach events to futute elements the .on()
+				 * method shall be used. The selector must be a 
+				 * existing "container" element (in this case the div.tickets)
+				 * the desired event ("click") is turned "on", for existent or
+				 * future elements specified by the given selector (".delete"),
+				 * alongside with the handler function
+				 * 
+				 */
+				$("div.tickets").on("click",".delete",function () {
+					//removes the parent (and its offspring) of the clicked element
+					$(this).parent().empty();
 				});
 				
 				$("#bregister").click ( function () {
