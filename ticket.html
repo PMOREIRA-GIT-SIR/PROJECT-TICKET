@@ -3,7 +3,6 @@
 		<script src="JQuery/jquery-1.10.2.js"></script>
 		<script>
 		
-		
 			function addTicket() {
 				ticketdiv = $("<div/>").addClass("ticket");
 
@@ -12,6 +11,7 @@
 				iname.addClass("name");
 				iname.attr("type","text");
 				iname.attr("placeholder","first and last name");
+				
 				// age input field
 				iage = $("<input>");
 				iage.addClass("age");
@@ -36,6 +36,7 @@
 			$(document).ready( function () {
 				// first thing
 				$(".tickets").append(addTicket());
+				$(".tickets").append(addTicket());
 				
 				$("#badd").click( function () {
 					$(".tickets").append(addTicket());
@@ -48,23 +49,26 @@
 				 */
 				/*
 				$(".delete").click( function () {
-					$(this).parent().empty();
+					$(this).parent().remove();
 				});
 				*/
 				
+				
 				/*
-				 * to attach events to futute elements the .on()
+				 * To attach events to futute elements the .on()
 				 * method shall be used. The selector must be a 
-				 * existing "container" element (in this case the div.tickets)
-				 * the desired event ("click") is turned "on", for existent or
+				 * existing container element (in this case the "div.tickets").
+				 * The desired event ("click") is turned "on", for existent or
 				 * future elements specified by the given selector (".delete"),
 				 * alongside with the handler function
 				 * 
 				 */
-				$("div.tickets").on("click",".delete",function () {
+				
+				 $("div.tickets").on("click",".delete",function () {
 					//removes the parent (and its offspring) of the clicked element
-					$(this).parent().empty();
-				});
+					$(this).parent().remove();
+				 });
+				
 				
 				$("#bregister").click ( function () {
 					
